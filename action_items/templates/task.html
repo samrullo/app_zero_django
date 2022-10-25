@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1>Task details</h1>
+<ul class="list-group list-group-horizontal">
+    <li class="list-group-item">
+        <a href="{% url 'edit_task' task.pk %}" class="btn btn-primary">Edit</a>
+    </li>
+    <li class="list-group-item">
+        <a href="{% url 'tasks_of_project' task.task_project.pk %}" class="btn btn-primary">Taskf of Project</a>
+    </li>
+</ul>
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <th>Field</th>
+            <th>Value</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Name</td>
+                <td>{{task.name}}</td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td>{{task.description}}</td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td><span class="task-status task-status-{{task.status}}">{{task.status}}</span></td>
+            </tr>
+            <tr>
+                <td>Deadline</td>
+                <td>{{task.deadline}}</td>
+            </tr>
+            <tr>
+                <td>Progress</td>
+                <td>{{task.progress}}</td>
+            </tr>
+            <tr>
+                <td>Created on</td>
+                <td>{{task.created_on}}</td>
+            </tr>
+            <tr>
+                <td>Las modified</td>
+                <td>{{task.last_modified}}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Submit" class="btn btn-primary">
+</form>
+
+{% for comment in comments %}
+<div class="row">
+    <div class="col">
+        <div style="font-size: 7px;color:gray;">{{comment.created_on}}</div>
+        <p>{{comment.comment}}</p>
+        
+    </div>
+    
+</div>
+
+{% endfor %}
+{% endblock %}

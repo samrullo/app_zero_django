@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Task projects</h1>
+<ul class="list-group list-group-horizontal">
+    <li class="list-group-item">
+        <a href="{% url 'new_task_project' %}" class="btn btn-primary">New Task Project</a>
+    </li>
+</ul>
+<table class="table table-hover orderByDateTable">
+    <thead order_col_no="0">
+        <th scope="col">Client</th>
+        <th scope="col">Project</th>
+        <th scope="col">Status</th>
+        <th scope="col">Deadline</th>
+        <th scope="col">Progress (%)</th>
+        <th scope="col">Created on</th>
+        <th scope="col">Last modified</th>
+        <th scope="col">View task</th>
+    </thead>
+    <tbody>
+    {% for task_project in task_projects %}
+        <tr>
+            <td>{{task_project.client}}</td>
+            <td>{{task_project.project_name}}</td>
+            <td>{{task_project.status}}</td>
+            <td>{{task_project.deadline}}</td>
+            <td>{{task_project.progress}}</td>
+            <td>{{task.created_on}}</td>
+            <td>{{task.last_modified}}</td>
+            <td><a href="{% url 'tasks_of_project' task_project.pk %}" class="btn btn-dark">View</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
