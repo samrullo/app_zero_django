@@ -98,18 +98,18 @@ h2 {
   text-align: center;
 }
 
-.task-status-New{
+.task-status-new{
   border-color: rgb(81, 129, 242);
   color:rgb(81, 129, 242);
   text-align: center
 }
 
-.task-status-InProgress{  
+.task-status-inprogress{  
   border-color: rgb(245, 219, 23);  
   background-color: rgb(245, 219, 23);
 }
 
-.task-status-Complete{  
+.task-status-complete{  
   border-color: rgb(23, 245, 30);
   background-color: rgb(23, 245, 30);
 }

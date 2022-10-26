@@ -7,5 +7,6 @@ urlpatterns = [path("",views.home,name="action_item_home"),
             path("task_projects/new",views.new_task_project, name="new_task_project"),
             path("task_project/<int:task_project_pk>",views.view_tasks_of_project, name="tasks_of_project"),
             path("task/<int:task_pk>",views.view_task, name="task"),
-            path("task/edit/<int:task_pk>",views.edit_task,name="edit_task")
+            path("task/edit/<int:task_pk>",views.edit_task,name="edit_task"),
+            path("task/new/<int:task_project_pk>",views.new_task,name="new_task")
             ]

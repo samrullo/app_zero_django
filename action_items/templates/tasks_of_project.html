@@ -6,6 +6,9 @@
     <li class="list-group-item">
         <a href="{% url 'task_projects' %}" class="btn btn-dark">Task Projects</a>
     </li>
+    <li class="list-group-item">
+        <a href="{% url 'new_task' task_project.pk%}" class="btn btn-primary">New Task</a>
+    </li>
 </ul>
 <table class="table table-hover orderByDateTable">
     <thead order_col_no="0">
@@ -23,7 +26,7 @@
         <tr>
             <td>{{task.name}}</td>
             <td>{{task.description}}</td>
-            <td><span class="task-status task-status-{{task.status}}">{{task.status}}</span></td>
+            <td><span class="task-status task-status-{{task.status.shortname}}">{{task.status.longname}}</span></td>
             <td>{{task.deadline}}</td>
             <td>{{task.progress}}</td>
             <td>{{task.created_on}}</td>

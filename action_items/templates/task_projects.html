@@ -23,7 +23,7 @@
         <tr>
             <td>{{task_project.client}}</td>
             <td>{{task_project.project_name}}</td>
-            <td>{{task_project.status}}</td>
+            <td><span class="task-status task-status-{{task_project.status.shortname}}">{{task_project.status.longname}}</span></td>
             <td>{{task_project.deadline}}</td>
             <td>{{task_project.progress}}</td>
             <td>{{task.created_on}}</td>
