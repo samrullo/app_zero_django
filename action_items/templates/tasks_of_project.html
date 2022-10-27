@@ -10,6 +10,17 @@
         <a href="{% url 'new_task' task_project.pk%}" class="btn btn-primary">New Task</a>
     </li>
 </ul>
+<ul class="list-group list-group-horizontal">
+    <li class="list-group-item">
+        <a href="{% url 'tasks_of_project' task_project.pk %}" class="btn">All</a>
+    </li>
+    {% for status in statuses %}
+    <li class="list-group-item">
+        <a href="{% url 'tasks_of_project_by_status' task_project.pk status.pk %}" class="btn task-status task-status-{{status.shortname}}">{{status.longname}}</a>
+    </li>
+    {% endfor %}
+    
+</ul>
 <table class="table table-hover orderByDateTable">
     <thead order_col_no="0">
         <th scope="col">Name</th>

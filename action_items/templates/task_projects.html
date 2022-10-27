@@ -16,7 +16,8 @@
         <th scope="col">Progress (%)</th>
         <th scope="col">Created on</th>
         <th scope="col">Last modified</th>
-        <th scope="col">View task</th>
+        <th scope="col">View</th>
+        <th scope="col">Edit</th>
     </thead>
     <tbody>
     {% for task_project in task_projects %}
@@ -29,6 +30,7 @@
             <td>{{task.created_on}}</td>
             <td>{{task.last_modified}}</td>
             <td><a href="{% url 'tasks_of_project' task_project.pk %}" class="btn btn-dark">View</a></td>
+            <td><a href="{% url 'edit_task_project' task_project.pk %}" class="btn btn-dark">Edit</a></td>
         </tr>
     {% endfor %}
     </tbody>

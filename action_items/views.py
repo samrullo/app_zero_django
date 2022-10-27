@@ -17,7 +17,8 @@ def view_task_projects(request):
 def view_tasks_of_project(request,task_project_pk:int):
     task_project=TaskProject.objects.get(pk=task_project_pk)
     tasks = Task.objects.filter(task_project=task_project)
-    return render(request,"tasks_of_project.html",{"task_project":task_project,"tasks":tasks})
+    statuses = Status.objects.all()
+    return render(request,"tasks_of_project.html",{"task_project":task_project,"tasks":tasks,"statuses":statuses})
 
 def view_task(request,task_pk:int):
     task = Task.objects.get(pk=task_pk)
@@ -68,6 +69,28 @@ def new_task_project(request):
             return redirect(reverse('task_projects'))
     form.fields["status"].widget.choices = [(status.pk,status.longname) for status in Status.objects.all()]
     return render(request,'new_item.html',{"title":"New Task Project","form":form})
+
+def edit_task_project(request,task_project_pk:int):
+    task_project=TaskProject.objects.get(pk=task_project_pk)    
+    if request.method=='POST':
+        form=TaskProjectForm(request.POST)
+        if form.is_valid():
+            status=Status.objects.get(pk=form.cleaned_data["status"])
+            task_project.client=form.cleaned_data["client"]
+            task_project.project_name=form.cleaned_data["project_name"]
+            task_project.status=status
+            task_project.deadline=form.cleaned_data["deadline"]
+            task_project.progress=form.cleaned_data["progress"]
+            task_project.save()
+            return redirect(reverse('task_projects'))
+    
+    form=TaskProjectForm({"client":task_project.client,
+    "project_name":task_project.project_name,
+    "status":task_project.status.pk,
+    "deadline":task_project.deadline,
+    "progress":task_project.progress})
+    form.fields["status"].widget.choices=[(status.pk,status.longname) for status in Status.objects.all()]
+    return render(request,"edit_task.html",{"form":form})
 
 def new_task(request,task_project_pk:int):
     task_project=TaskProject.objects.get(pk=task_project_pk)
