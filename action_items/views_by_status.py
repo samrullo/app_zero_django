@@ -4,7 +4,7 @@ from .models import Task,TaskProject,Status
 def view_all_tasks(request,status_pk:int):
     status=Status.objects.get(pk=status_pk)
     tasks=Task.objects.filter(status=status)
-    return render(request,"all_tasks_flat.html",{'tasks':tasks})
+    return render(request,"all_tasks_flat.html",{'tasks':tasks,'title':f"Tasks with status {status.longname}"})
 
 def view_task_projects(request,status_pk:int):
     status=Status.objects.get(pk=status_pk)

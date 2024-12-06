@@ -2,9 +2,8 @@
 
 {% block content %}
 <h1>Action items Home page</h1>
-<ul class="list-group">
-    <li class="list-group-item">
-        <a href="{% url 'task_projects' %}" class="btn btn-dark">Task projects</a>
-    </li>    
+<div class="list-group">
+    <a class="list-group-item list-group-item-action" href="{% url 'all_tasks_by_status' 2 %}" >Pending tasks</a>      
+    <a class="list-group-item list-group-item-action" href="{% url 'task_projects' %}">Task projects</a>    
 </ul>
 {% endblock %}
