@@ -10,17 +10,19 @@
         <th scope="col">Task description</th>
         <th scope="col">Created on</th>
         <th scope="col">Last modified</th>
+        <th scope="col">View</th>
     </thead>
     <tbody>
     {% for task in tasks %}
-        <tr>
-            <td>{{task.task_project.client}}</td>
-            <td>{{task.task_project.project_name}}</td>
-            <td>{{task.name}}</td>
-            <td>{{task.description}}</td>
-            <td>{{task.created_on}}</td>
-            <td>{{task.last_modified}}</td>
-        </tr>
+    <tr>
+        <td>{{task.task_project.client}}</td>
+        <td>{{task.task_project.project_name}}</td>
+        <td>{{task.name}}</td>
+        <td>{{task.description}}</td>
+        <td>{{task.created_on}}</td>
+        <td>{{task.last_modified}}</td>
+        <td><a href="{% url 'task' task.pk %}" class="btn btn-dark">View</a></td>
+    </tr>
     {% endfor %}
     </tbody>
 </table>

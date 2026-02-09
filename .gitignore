@@ -144,4 +144,5 @@ cython_debug/
 migrations
 secret/
 credentials/
+creds/
 playground/

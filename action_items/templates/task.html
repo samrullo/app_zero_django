@@ -1,5 +1,5 @@
 {% extends "layout.html" %} {% block content %}
-
+{% load markdownify %}
 <h1>Task details</h1>
 <ul class="list-group list-group-horizontal">
   <li class="list-group-item">
@@ -9,7 +9,7 @@
     <a
       href="{% url 'tasks_of_project' task.task_project.pk %}"
       class="btn btn-primary"
-      >Taskf of Project</a
+      >Tasks of Project</a
     >
   </li>
 </ul>
@@ -67,17 +67,27 @@
   </table>
 </div>
 
-<form method="post">
-  {% csrf_token %} {{form.as_p}}
+<form method="post" action="{% url 'task' task.pk %}">
+  {% csrf_token %}
+
+  <div class="form-group">
+    {{ form.comment.label_tag }}
+    {{ form.comment }}
+  </div>
+
   <input type="submit" value="Submit" class="btn btn-primary" />
 </form>
+
 
 {% for comment in comments %}
 <div class="row">
   <div class="col">
     <div style="font-size: 7px; color: gray">{{comment.created_on}}</div>
-    <p>{{comment.comment}}</p>
+    <div>{{ comment.comment|markdownify }}</div>
   </div>
 </div>
+{% endfor %}
 
-{% endfor %} {% endblock %}
+
+
+{% endblock %}
